@@ -6,6 +6,7 @@ use App\Enums\ParcelStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Parcel extends Model
@@ -17,6 +18,11 @@ class Parcel extends Model
     protected $casts = [
         'status' => ParcelStatusEnum::class
     ];
+
+    public function locations(): HasMany
+    {
+        return $this->hasMany(ParcelLocation::class);
+    }
 
     public function source(): HasOne
     {

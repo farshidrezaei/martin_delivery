@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->integerIncrements('id');
             $table->foreignId('parcel_id')->constrained('parcels');
             $table->enum('type', ['source', 'destination'])->index();
-            $table->string('name');
+            $table->string('name',64);
             $table->string('address', 2000);
             $table->string('phone', 11);
             $table->decimal('latitude', 3, 8);
