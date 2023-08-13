@@ -22,7 +22,7 @@ class ParcelFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid(),
-            'delivery_id' => DeliveryCourier::factory(),
+            'delivery_courier_id' => DeliveryCourier::factory(),
             'business_id' => Business::factory(),
             'status' => $this->faker->randomElement(ParcelStatusEnum::values())
         ];

@@ -21,12 +21,12 @@ class ParcelLocationFactory extends Factory
     {
         return [
             'parcel_id' => Parcel::factory(),
-            'type' => $this->faker->unique()->randomElement(ParcelLocationTypeEnum::values()),
+            'type' => $this->faker->randomElement(ParcelLocationTypeEnum::values()),
             'name' => $this->faker->name(),
             'address' => $this->faker->address(),
             'phone' => $this->faker->phoneNumber(),
-            'lat' => $this->faker->latitude(),
-            'long' => $this->faker->longitude()
+            'latitude' => $this->faker->latitude(),
+            'longitude' => $this->faker->longitude()
         ];
     }
 }

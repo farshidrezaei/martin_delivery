@@ -48,4 +48,26 @@ class Parcel extends Model
     {
         return in_array($this->status->value, [ParcelStatusEnum::PENDING->value, ParcelStatusEnum::ACCEPTED->value]);
     }
+
+    public function isAccepted(): bool
+    {
+        return $this->status->value === ParcelStatusEnum::ACCEPTED->value;
+    }
+
+    public function isInGoingToSource(): bool
+    {
+        return $this->status->value === ParcelStatusEnum::IS_GOING_TO_SOURCE->value;
+    }
+
+    public function isInGoingToDestination(): bool
+    {
+        return $this->status->value === ParcelStatusEnum::IS_GOING_TO_DESTINATION->value;
+    }
+
+    public function isNotAccepted(): bool
+    {
+        return !$this->isAccepted();
+    }
+
+
 }
