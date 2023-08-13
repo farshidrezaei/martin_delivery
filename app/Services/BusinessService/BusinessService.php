@@ -34,8 +34,8 @@ class BusinessService
                 'name' => $parcelDTO->getSourceName(),
                 'address' => $parcelDTO->getSourceAddress(),
                 'phone' => $parcelDTO->getSourcePhone(),
-                'lat' => $parcelDTO->getSourceLat(),
-                'long' => $parcelDTO->getSourceLong(),
+                'latitude' => $parcelDTO->getSourceLat(),
+                'longitude' => $parcelDTO->getSourceLong(),
             ]);
 
             $parcel->locations()->create([
@@ -43,8 +43,8 @@ class BusinessService
                 'name' => $parcelDTO->getDestinationName(),
                 'address' => $parcelDTO->getDestinationAddress(),
                 'phone' => $parcelDTO->getDestinationPhone(),
-                'lat' => $parcelDTO->getDestinationLat(),
-                'long' => $parcelDTO->getDestinationLong(),
+                'latitude' => $parcelDTO->getDestinationLat(),
+                'longitude' => $parcelDTO->getDestinationLong(),
             ]);
 
             DB::commit();

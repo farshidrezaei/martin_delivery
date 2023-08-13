@@ -19,8 +19,6 @@ class DeliveryCourierFactory extends Factory
         return [
             'full_name' => $this->faker->name(),
             'phone' => $this->faker->phoneNumber(),
-            'lat' => $this->faker->latitude(),
-            'long' => $this->faker->longitude()
         ];
     }
 }

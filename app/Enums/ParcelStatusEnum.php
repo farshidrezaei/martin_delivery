@@ -12,7 +12,7 @@ enum ParcelStatusEnum: string
     case ACCEPTED = 'accepted';
     case CANCELED = 'canceled';
 
-    case IS_GOING_TO_SOURCE_LOCATION = 'is_going_to_source';
-    case IS_GOING_TO_DESTINATION_LOCATION = 'is_going_to_destination';
+    case IS_GOING_TO_SOURCE = 'is_going_to_source';
+    case IS_GOING_TO_DESTINATION = 'is_going_to_destination';
     case DONE = 'done';
 }

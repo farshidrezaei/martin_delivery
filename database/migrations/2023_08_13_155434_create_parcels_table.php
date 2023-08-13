@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->integerIncrements('id');
             $table->uuid()->index();
 
-            $table->foreignId('delivery_courier_id')->constrained('delivery_couriers');
+            $table->foreignId('delivery_courier_id')->nullable()->constrained('delivery_couriers');
             $table->foreignId('business_id')->constrained('businesses');
 
             $table->string('status')->index();
