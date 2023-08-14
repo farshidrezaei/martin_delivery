@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\BusinessService;
+namespace App\Services;
 
 use App\Dtos\ParcelDTO;
 use App\Enums\ParcelLocationTypeEnum;

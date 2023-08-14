@@ -27,7 +27,7 @@ Route::prefix('v1')->name('v1.')->middleware(['auth:sanctum'])->group(function (
                 Route::patch('{uuid}/assign', 'assignParcel')->name('assign');
                 Route::patch('{uuid}/go-to-source', 'goToParcelSource')->name('go-to-parcel-source');
                 Route::patch('{uuid}/go-to-destination', 'goToParcelDestination')->name('go-to-destination');
-                Route::patch('{uuid}/done', 'deliverParcel')->name('deliver');
+                Route::patch('{uuid}/deliver', 'deliverParcel')->name('deliver');
             });
         });
 

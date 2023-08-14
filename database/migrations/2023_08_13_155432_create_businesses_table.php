@@ -10,7 +10,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('businesses', function (Blueprint $table) {
-            $table->integerIncrements('id');
+            $table->id();
             $table->string('username')->unique();
             $table->string('webhook_url',2048);
             $table->timestamps();

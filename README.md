@@ -41,6 +41,12 @@ then migrate database
 docker exec -it product_marketing-php php /var/www/html/artisan migrate
 ```
 
+if you want to generate tokens for testing functionality by something like Postman, run bellow command:
+
+```bash
+docker exec -it product_marketing-php php /var/www/html/artisan generate:test-tokens
+```
+
 ## Test
 ```bash
 docker exec -it product_marketing-php php /var/www/html/artisan test

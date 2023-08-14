@@ -8,6 +8,7 @@ use App\Http\Resources\ParcelResource;
 use App\Models\DeliveryCourier;
 use App\Models\Parcel;
 use App\Models\ParcelLocation;
+use App\Models\ParcelTrackLog;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Testing\TestResponse;
 use Laravel\Sanctum\Sanctum;
@@ -89,11 +90,15 @@ class DeliveryTest extends TestCase
         ParcelLocation::factory()->state(['type' => ParcelLocationTypeEnum::SOURCE])->for($parcel)->create();
         ParcelLocation::factory()->state(['type' => ParcelLocationTypeEnum::DESTINATION])->for($parcel)->create();
 
-        $response = $this->patchJson(route('v1.delivery.parcel.assign', $parcel->uuid));
+        $response = $this->patchJson(route('v1.delivery.parcel.assign', $parcel->uuid), [
+            'latitude' => $this->faker->latitude,
+            'longitude' => $this->faker->longitude,
+        ]);
         $response->assertStatus(200);
         $this->assertSame(ParcelStatusEnum::ACCEPTED->value, $parcel->refresh()->status->value);
         $this->assertSame($deliveryCourier->id, $parcel->refresh()->delivery_courier_id);
         Notification::assertCount(1);
+        $this->assertDatabaseHas(ParcelTrackLog::class,['parcel_id' => $parcel->id]);
     }
 
     public function testDeliveryCanChangeAcceptedParcelToGoingToSourceLocation()
@@ -109,11 +114,16 @@ class DeliveryTest extends TestCase
         ParcelLocation::factory()->state(['type' => ParcelLocationTypeEnum::SOURCE])->for($parcel)->create();
         ParcelLocation::factory()->state(['type' => ParcelLocationTypeEnum::DESTINATION])->for($parcel)->create();
 
-        $response = $this->patchJson(route('v1.delivery.parcel.go-to-parcel-source', $parcel->uuid));
+        $response = $this->patchJson(route('v1.delivery.parcel.go-to-parcel-source', $parcel->uuid), [
+            'latitude' => $this->faker->latitude,
+            'longitude' => $this->faker->longitude,
+        ]);
 
         $response->assertStatus(200);
         $this->assertSame(ParcelStatusEnum::IS_GOING_TO_SOURCE->value, $parcel->refresh()->status->value);
         Notification::assertCount(1);
+        $this->assertDatabaseHas(ParcelTrackLog::class,['parcel_id' => $parcel->id]);
+
     }
 
     public function testDeliveryCanChangeGoingToSourceLocationParcelToGoingToDestinationLocation()
@@ -129,12 +139,17 @@ class DeliveryTest extends TestCase
         ParcelLocation::factory()->state(['type' => ParcelLocationTypeEnum::SOURCE])->for($parcel)->create();
         ParcelLocation::factory()->state(['type' => ParcelLocationTypeEnum::DESTINATION])->for($parcel)->create();
 
-        $response = $this->patchJson(route('v1.delivery.parcel.go-to-destination', $parcel->uuid));
+        $response = $this->patchJson(route('v1.delivery.parcel.go-to-destination', $parcel->uuid), [
+            'latitude' => $this->faker->latitude,
+            'longitude' => $this->faker->longitude,
+        ]);
 
 
         $response->assertStatus(200);
         $this->assertSame(ParcelStatusEnum::IS_GOING_TO_DESTINATION->value, $parcel->refresh()->status->value);
         Notification::assertCount(1);
+        $this->assertDatabaseHas(ParcelTrackLog::class,['parcel_id' => $parcel->id]);
+
     }
 
     public function testDeliveryCanChangeGoingToDestinationLocationParcelToDone()
@@ -150,12 +165,17 @@ class DeliveryTest extends TestCase
         ParcelLocation::factory()->state(['type' => ParcelLocationTypeEnum::SOURCE])->for($parcel)->create();
         ParcelLocation::factory()->state(['type' => ParcelLocationTypeEnum::DESTINATION])->for($parcel)->create();
 
-        $response = $this->patchJson(route('v1.delivery.parcel.deliver', $parcel->uuid));
+        $response = $this->patchJson(route('v1.delivery.parcel.deliver', $parcel->uuid), [
+            'latitude' => $this->faker->latitude,
+            'longitude' => $this->faker->longitude,
+        ]);
 
 
         $response->assertStatus(200);
         $this->assertSame(ParcelStatusEnum::DONE->value, $parcel->refresh()->status->value);
         Notification::assertCount(1);
+        $this->assertDatabaseHas(ParcelTrackLog::class,['parcel_id' => $parcel->id]);
+
     }
 
     private function assertResponseContainsParcels(TestResponse $response, ...$parcels): void

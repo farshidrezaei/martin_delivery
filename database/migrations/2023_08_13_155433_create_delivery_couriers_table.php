@@ -10,7 +10,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('delivery_couriers', function (Blueprint $table) {
-            $table->integerIncrements('id');
+            $table->id();
             $table->string('phone',11);
             $table->string('full_name');
             $table->timestamps();

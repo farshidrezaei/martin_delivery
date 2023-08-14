@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\DeliveryCourierService;
+namespace App\Services;
 
 use App\Enums\ParcelStatusEnum;
 use App\Exceptions\DeliveryCourierHasOneOnGoingParcelException;
@@ -8,7 +8,6 @@ use App\Exceptions\ParcelIsNotAcceptedException;
 use App\Exceptions\ParcelIsNotOnGoingToDestinationStatusException;
 use App\Exceptions\ParcelIsNotOnGoingToSourceStatusException;
 use App\Models\Parcel;
-use App\Notifications\BusinessParcelNotification;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -47,14 +46,13 @@ class DeliveryCourierService
      * @throws ParcelIsNotAcceptedException
      * @throws Throwable
      */
-    public
-    function goToSource(
-        string $parcelUuid,
-        int $deliveryId
-    ): Parcel {
+    public function goToSource(string $parcelUuid, int $deliveryId): Parcel
+    {
         $parcel = Parcel::query()
             ->whereUuid($parcelUuid)
             ->whereDeliveryCourierId($deliveryId)
+            ->whereIn('status', [ParcelStatusEnum::ACCEPTED, ParcelStatusEnum::PENDING])
+            ->whereNotIn('status', [ParcelStatusEnum::DONE, ParcelStatusEnum::CANCELED])
             ->with(['source', 'destination', 'business', 'deliveryCourier'])
             ->firstOrFail();
 
@@ -64,8 +62,6 @@ class DeliveryCourierService
 
         $parcel->update(['status' => ParcelStatusEnum::IS_GOING_TO_SOURCE]);
 
-        $parcel->business->notify(new BusinessParcelNotification($parcel));
-
         return $parcel;
     }
 
@@ -73,22 +69,18 @@ class DeliveryCourierService
     /**
      * @throws ParcelIsNotOnGoingToSourceStatusException|Throwable
      */
-    public
-    function goToDestination(
-        string $parcelUuid,
-        int $deliveryId,
-    ): Parcel {
+    public function goToDestination(string $parcelUuid, int $deliveryId,): Parcel
+    {
         $parcel = Parcel::query()
             ->whereUuid($parcelUuid)
             ->whereDeliveryCourierId($deliveryId)
             ->with(['source', 'destination', 'business', 'deliveryCourier'])
+            ->whereNotIn('status', [ParcelStatusEnum::DONE, ParcelStatusEnum::CANCELED])
             ->firstOrFail();
 
         throw_unless($parcel->isInGoingToSource(), ParcelIsNotOnGoingToSourceStatusException::class);
 
         $parcel->update(['status' => ParcelStatusEnum::IS_GOING_TO_DESTINATION]);
-
-        $parcel->business->notify(new BusinessParcelNotification($parcel));
 
         return $parcel;
     }
@@ -96,22 +88,18 @@ class DeliveryCourierService
     /**
      * @throws Throwable
      */
-    public
-    function deliverParcel(
-        string $parcelUuid,
-        int $deliveryId
-    ): Parcel {
+    public function deliverParcel(string $parcelUuid, int $deliveryId): Parcel
+    {
         $parcel = Parcel::query()
             ->whereUuid($parcelUuid)
             ->whereDeliveryCourierId($deliveryId)
+            ->whereNotIn('status', [ParcelStatusEnum::DONE, ParcelStatusEnum::CANCELED])
             ->with(['source', 'destination', 'business', 'deliveryCourier'])
             ->firstOrFail();
 
         throw_unless($parcel->isInGoingToDestination(), ParcelIsNotOnGoingToDestinationStatusException::class);
 
         $parcel->update(['status' => ParcelStatusEnum::DONE->value]);
-
-        $parcel->business->notify(new BusinessParcelNotification($parcel));
 
         return $parcel;
     }
@@ -134,8 +122,6 @@ class DeliveryCourierService
                 ->firstOrFail();
 
             $parcel->update(['delivery_courier_id' => $deliveryId, 'status' => ParcelStatusEnum::ACCEPTED]);
-
-            $parcel->business->notify(new BusinessParcelNotification($parcel));
 
             DB::commit();
             return $parcel;

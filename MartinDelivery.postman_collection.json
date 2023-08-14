@@ -1,0 +1,1373 @@
+{
+	"info": {
+		"_postman_id": "f5002ea6-4de6-41c4-a0bf-763039b5b16d",
+		"name": "Martin Deliver",
+		"description": "شـرکت مـارتین دلیور پـس از ۱۰ سـال سـابـقه در زمینه ارسـال مـرسـولـه هـای حـساس در سـطح شهـر تهـران بـا  \nداشـتن پیک هـای مـختلف تـمایل دارد رونـد سـفارش گیری خـود را بـه صـورت آنـلاین به مجـموعـه هـای مـختلف  \nارائـه دهـد؛ بـه این مـنظور که هـمانـند سـرویس هـای الـوپیک و اسـنپ بـاکس مسـتقیمبـا کاربـر نـهایی ارتـباط  \nندارد و سرویس خود را مستقیما به مجموعه های با سفارش ارسال بالا ارائه میدهد. (سرویسB2B(",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3731742"
+	},
+	"item": [
+		{
+			"name": "Business",
+			"item": [
+				{
+					"name": "Parcel",
+					"item": [
+						{
+							"name": "Store",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{business_bear_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"source_name\": \"Prof. Reed West V\",\n    \"source_address\": \"New Maida\",\n    \"source_phone\": \"09121234567\",\n    \"source_latitude\": -14.305084,\n    \"source_longitude\": 102.812774,\n    \"destination_name\": \"Abigail Watsica\",\n    \"destination_address\": \"Lake Kenneth\",\n    \"destination_phone\": \"09351478569\",\n    \"destination_latitude\": 74.738877,\n    \"destination_longitude\": 94.140674\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/business/parcels",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"business",
+										"parcels"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"source_name\": \"Prof. Reed West V\",\n    \"source_address\": \"New Maida\",\n    \"source_phone\": \"09121234567\",\n    \"source_latitude\": -14.305084,\n    \"source_longitude\": 102.812774,\n    \"destination_name\": \"Abigail Watsica\",\n    \"destination_address\": \"Lake Kenneth\",\n    \"destination_phone\": \"09351478569\",\n    \"destination_latitude\": 74.738877,\n    \"destination_longitude\": 94.140674\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/business/parcels",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"business",
+												"parcels"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.8"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 14 Aug 2023 08:54:18 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"parcel_uuid\": \"7926b942-3898-4de5-9a62-47d0c383d8ac\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Cancel",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/business/parcels/:parcel/cancel",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"business",
+										"parcels",
+										":parcel",
+										"cancel"
+									],
+									"variable": [
+										{
+											"key": "parcel",
+											"value": "7926b942-3898-4de5-9a62-47d0c383d8ac"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/business/parcels/:parcel/cancel",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"business",
+												"parcels",
+												":parcel",
+												"cancel"
+											],
+											"variable": [
+												{
+													"key": "parcel",
+													"value": "7926b942-3898-4de5-9a62-47d0c383d8ac"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.8"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 14 Aug 2023 08:54:35 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "58"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"uuid\": \"7926b942-3898-4de5-9a62-47d0c383d8ac\",\n    \"status\": \"canceled\"\n}"
+								}
+							]
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{business_bear_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Delivery",
+			"item": [
+				{
+					"name": "Parcel",
+					"item": [
+						{
+							"name": "Pending",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/delivery/parcels/pending",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"delivery",
+										"parcels",
+										"pending"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/api/v1/delivery/parcels/pending",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"delivery",
+												"parcels",
+												"pending"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.8"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 14 Aug 2023 08:57:26 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": [\n        {\n            \"id\": \"4364da58-b6ac-4f08-9eb0-a1986ec4cc1b\",\n            \"status\": \"pending\",\n            \"business\": {\n                \"username\": \"darrell57\"\n            },\n            \"source\": {\n                \"name\": \"Prof. Reed West V\",\n                \"phone\": \"09121234567\",\n                \"address\": \"New Maida\",\n                \"latitude\": \"-14.30508400\",\n                \"longitude\": \"102.81277400\"\n            },\n            \"destination\": {\n                \"name\": \"Abigail Watsica\",\n                \"phone\": \"09351478569\",\n                \"address\": \"Lake Kenneth\",\n                \"latitude\": \"74.73887700\",\n                \"longitude\": \"94.14067400\"\n            },\n            \"created_at\": \"2023-08-14 08:55:31\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://127.0.0.1:8080/api/v1/delivery/parcels/pending?page=1\",\n        \"last\": \"http://127.0.0.1:8080/api/v1/delivery/parcels/pending?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://127.0.0.1:8080/api/v1/delivery/parcels/pending?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://127.0.0.1:8080/api/v1/delivery/parcels/pending\",\n        \"per_page\": 15,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Accepted",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/delivery/parcels/accepted",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"delivery",
+										"parcels",
+										"accepted"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/api/v1/delivery/parcels/accepted",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"delivery",
+												"parcels",
+												"accepted"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.8"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 14 Aug 2023 09:00:21 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": [\n        {\n            \"id\": \"4364da58-b6ac-4f08-9eb0-a1986ec4cc1b\",\n            \"status\": \"accepted\",\n            \"business\": {\n                \"username\": \"darrell57\"\n            },\n            \"source\": {\n                \"name\": \"Prof. Reed West V\",\n                \"phone\": \"09121234567\",\n                \"address\": \"New Maida\",\n                \"latitude\": \"-14.30508400\",\n                \"longitude\": \"102.81277400\"\n            },\n            \"destination\": {\n                \"name\": \"Abigail Watsica\",\n                \"phone\": \"09351478569\",\n                \"address\": \"Lake Kenneth\",\n                \"latitude\": \"74.73887700\",\n                \"longitude\": \"94.14067400\"\n            },\n            \"created_at\": \"2023-08-14 08:55:31\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://127.0.0.1:8080/api/v1/delivery/parcels/accepted?page=1\",\n        \"last\": \"http://127.0.0.1:8080/api/v1/delivery/parcels/accepted?page=1\",\n        \"prev\": null,\n        \"next\": null\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 1,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://127.0.0.1:8080/api/v1/delivery/parcels/accepted?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://127.0.0.1:8080/api/v1/delivery/parcels/accepted\",\n        \"per_page\": 15,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Assign",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"latitude\": 27.125464,\n    \"longitude\": -130.15646\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/delivery/parcels/:parcel/assign",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"delivery",
+										"parcels",
+										":parcel",
+										"assign"
+									],
+									"variable": [
+										{
+											"key": "parcel",
+											"value": "005d4c1b-c716-4648-8400-f0470c09785c"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/api/v1/delivery/parcels/:parcel/assign?latitude=27.125464&longitude=-130.15646",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"delivery",
+												"parcels",
+												":parcel",
+												"assign"
+											],
+											"query": [
+												{
+													"key": "latitude",
+													"value": "27.125464"
+												},
+												{
+													"key": "longitude",
+													"value": "-130.15646"
+												}
+											],
+											"variable": [
+												{
+													"key": "parcel",
+													"value": "4364da58-b6ac-4f08-9eb0-a1986ec4cc1b"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.8"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 14 Aug 2023 08:58:39 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"id\": \"4364da58-b6ac-4f08-9eb0-a1986ec4cc1b\",\n        \"status\": \"accepted\",\n        \"delivery\": null,\n        \"business\": {\n            \"username\": \"darrell57\"\n        },\n        \"source\": {\n            \"name\": \"Prof. Reed West V\",\n            \"phone\": \"09121234567\",\n            \"address\": \"New Maida\",\n            \"latitude\": \"-14.30508400\",\n            \"longitude\": \"102.81277400\"\n        },\n        \"destination\": {\n            \"name\": \"Abigail Watsica\",\n            \"phone\": \"09351478569\",\n            \"address\": \"Lake Kenneth\",\n            \"latitude\": \"74.73887700\",\n            \"longitude\": \"94.14067400\"\n        },\n        \"created_at\": \"2023-08-14 08:55:31\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Go To Source",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"latitude\": 27.125464,\n    \"longitude\": -130.15646\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/delivery/parcels/:parcel/go-to-source",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"delivery",
+										"parcels",
+										":parcel",
+										"go-to-source"
+									],
+									"variable": [
+										{
+											"key": "parcel",
+											"value": "005d4c1b-c716-4648-8400-f0470c09785c"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"latitude\": 27.125464,\n    \"longitude\": -130.15646\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/delivery/parcels/:parcel/go-to-source",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"delivery",
+												"parcels",
+												":parcel",
+												"go-to-source"
+											],
+											"variable": [
+												{
+													"key": "parcel",
+													"value": "4364da58-b6ac-4f08-9eb0-a1986ec4cc1b"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.8"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 14 Aug 2023 09:03:21 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"id\": \"4364da58-b6ac-4f08-9eb0-a1986ec4cc1b\",\n        \"status\": \"is_going_to_source\",\n        \"delivery\": {\n            \"full_name\": \"Isobel Hermiston\",\n            \"phone\": \"09541894507\"\n        },\n        \"business\": {\n            \"username\": \"darrell57\"\n        },\n        \"source\": {\n            \"name\": \"Prof. Reed West V\",\n            \"phone\": \"09121234567\",\n            \"address\": \"New Maida\",\n            \"latitude\": \"-14.30508400\",\n            \"longitude\": \"102.81277400\"\n        },\n        \"destination\": {\n            \"name\": \"Abigail Watsica\",\n            \"phone\": \"09351478569\",\n            \"address\": \"Lake Kenneth\",\n            \"latitude\": \"74.73887700\",\n            \"longitude\": \"94.14067400\"\n        },\n        \"created_at\": \"2023-08-14 08:55:31\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Go To Destination",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"latitude\": 27.125464,\n    \"longitude\": -130.15646\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/delivery/parcels/:parcel/go-to-destination",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"delivery",
+										"parcels",
+										":parcel",
+										"go-to-destination"
+									],
+									"variable": [
+										{
+											"key": "parcel",
+											"value": "005d4c1b-c716-4648-8400-f0470c09785c"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"latitude\": 27.125464,\n    \"longitude\": -130.15646\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/delivery/parcels/:parcel/go-to-destination",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"delivery",
+												"parcels",
+												":parcel",
+												"go-to-destination"
+											],
+											"variable": [
+												{
+													"key": "parcel",
+													"value": "4364da58-b6ac-4f08-9eb0-a1986ec4cc1b"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.8"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 14 Aug 2023 09:03:53 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "58"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"id\": \"4364da58-b6ac-4f08-9eb0-a1986ec4cc1b\",\n        \"status\": \"is_going_to_destination\",\n        \"delivery\": {\n            \"full_name\": \"Isobel Hermiston\",\n            \"phone\": \"09541894507\"\n        },\n        \"business\": {\n            \"username\": \"darrell57\"\n        },\n        \"source\": {\n            \"name\": \"Prof. Reed West V\",\n            \"phone\": \"09121234567\",\n            \"address\": \"New Maida\",\n            \"latitude\": \"-14.30508400\",\n            \"longitude\": \"102.81277400\"\n        },\n        \"destination\": {\n            \"name\": \"Abigail Watsica\",\n            \"phone\": \"09351478569\",\n            \"address\": \"Lake Kenneth\",\n            \"latitude\": \"74.73887700\",\n            \"longitude\": \"94.14067400\"\n        },\n        \"created_at\": \"2023-08-14 08:55:31\"\n    }\n}"
+								},
+								{
+									"name": "failed",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"latitude\": 27.125464,\n    \"longitude\": -130.15646\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/delivery/parcels/:parcel/go-to-destination",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"delivery",
+												"parcels",
+												":parcel",
+												"go-to-destination"
+											],
+											"variable": [
+												{
+													"key": "parcel",
+													"value": "005d4c1b-c716-4648-8400-f0470c09785c"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.8"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 14 Aug 2023 09:13:56 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "58"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"parcel is not on going to source.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Deliver",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"latitude\": 27.125464,\n    \"longitude\": -130.15646\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/delivery/parcels/:parcel/deliver",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"delivery",
+										"parcels",
+										":parcel",
+										"deliver"
+									],
+									"variable": [
+										{
+											"key": "parcel",
+											"value": "005d4c1b-c716-4648-8400-f0470c09785c"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"latitude\": 27.125464,\n    \"longitude\": -130.15646\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/delivery/parcels/:parcel/deliver",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"delivery",
+												"parcels",
+												":parcel",
+												"deliver"
+											],
+											"variable": [
+												{
+													"key": "parcel",
+													"value": "4364da58-b6ac-4f08-9eb0-a1986ec4cc1b"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.8"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 14 Aug 2023 09:04:35 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"id\": \"4364da58-b6ac-4f08-9eb0-a1986ec4cc1b\",\n        \"status\": \"done\",\n        \"delivery\": {\n            \"full_name\": \"Isobel Hermiston\",\n            \"phone\": \"09541894507\"\n        },\n        \"business\": {\n            \"username\": \"darrell57\"\n        },\n        \"source\": {\n            \"name\": \"Prof. Reed West V\",\n            \"phone\": \"09121234567\",\n            \"address\": \"New Maida\",\n            \"latitude\": \"-14.30508400\",\n            \"longitude\": \"102.81277400\"\n        },\n        \"destination\": {\n            \"name\": \"Abigail Watsica\",\n            \"phone\": \"09351478569\",\n            \"address\": \"Lake Kenneth\",\n            \"latitude\": \"74.73887700\",\n            \"longitude\": \"94.14067400\"\n        },\n        \"created_at\": \"2023-08-14 08:55:31\"\n    }\n}"
+								},
+								{
+									"name": "failed",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"latitude\": 27.125464,\n    \"longitude\": -130.15646\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/api/v1/delivery/parcels/:parcel/deliver",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"delivery",
+												"parcels",
+												":parcel",
+												"deliver"
+											],
+											"variable": [
+												{
+													"key": "parcel",
+													"value": "005d4c1b-c716-4648-8400-f0470c09785c"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept-Encoding"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.8"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 14 Aug 2023 09:14:18 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "57"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"parcel is not on going to destination.\"\n}"
+								}
+							]
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{delivery_bear_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8080",
+			"type": "string"
+		},
+		{
+			"key": "delivery_bear_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "business_bear_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

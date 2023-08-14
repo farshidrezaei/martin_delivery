@@ -18,7 +18,7 @@ class DeliveryCourierFactory extends Factory
     {
         return [
             'full_name' => $this->faker->name(),
-            'phone' => $this->faker->phoneNumber(),
+            'phone' => $this->faker->numerify('09#########'),
         ];
     }
 }
