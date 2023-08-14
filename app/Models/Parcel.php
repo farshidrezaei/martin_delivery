@@ -19,6 +19,7 @@ class Parcel extends Model
         'status' => ParcelStatusEnum::class
     ];
 
+
     public function locations(): HasMany
     {
         return $this->hasMany(ParcelLocation::class);
@@ -32,6 +33,16 @@ class Parcel extends Model
     public function destination(): HasOne
     {
         return $this->hasOne(ParcelLocation::class)->whereType('destination');
+    }
+
+    public function trackLogs(): HasMany
+    {
+        return $this->hasMany(ParcelTrackLog::class);
+    }
+
+    public function lastLocation(): HasOne
+    {
+        return $this->hasOne(ParcelTrackLog::class)->latestOfMany('created_at', 'trackLogs');
     }
 
     public function deliveryCourier(): BelongsTo

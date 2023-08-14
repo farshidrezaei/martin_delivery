@@ -5,26 +5,21 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    
+
     public function up(): void
     {
-        Schema::create('parcel_locations', function (Blueprint $table) {
+        Schema::create('parcel_track_logs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('parcel_id')->constrained('parcels');
-            $table->enum('type', ['source', 'destination'])->index();
-            $table->string('name',64);
-            $table->string('address', 2000);
-            $table->string('phone', 11);
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
-
-            $table->unique(['parcel_id', 'type']);
+            $table->timestamp('created_at');
         });
     }
 
-    
+
     public function down(): void
     {
-        Schema::dropIfExists('parcel_locations');
+        Schema::dropIfExists('parcel_track_logs');
     }
 };

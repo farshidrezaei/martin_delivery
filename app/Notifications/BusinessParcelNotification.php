@@ -34,7 +34,12 @@ class BusinessParcelNotification extends Notification implements ShouldQueue
 
     public function toWebhook()
     {
-        return json_decode(ParcelResource::make($this->parcel)->toJson(), true);
+        return json_decode(
+            ParcelResource::make(
+                $this->parcel->load('deliveryCourier', 'source', 'destination', 'business', 'trackLogs')
+            )->toJson(),
+            true
+        );
     }
 
     public function viaQueues(): array

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\API\V1\Business;
 
 use App\DTOs\ParcelDTO;
 use App\Exceptions\ParcelIsNotInCancelableException;
+use App\Facades\BusinessFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BusinessParcelRequest;
-use App\Services\BusinessService\BusinessService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -14,9 +14,6 @@ use Throwable;
 
 class BusinessParcelController extends Controller
 {
-    public function __construct(private readonly BusinessService $businessService)
-    {
-    }
 
     /**
      * @throws Exception
@@ -35,7 +32,7 @@ class BusinessParcelController extends Controller
             ->setDestinationLat($request->validated('destination_latitude'))
             ->setDestinationLong($request->validated('destination_longitude'));
 
-        $parcel = $this->businessService->storeParcel($parcelDTO);
+        $parcel = BusinessFacade::storeParcel($parcelDTO);
 
         return new JsonResponse(['parcel_uuid' => $parcel->uuid], 201);
     }
@@ -47,7 +44,7 @@ class BusinessParcelController extends Controller
      */
     public function cancel(string $uuid): JsonResponse
     {
-        $parcel = $this->businessService->cancelParcel(Auth::id(), $uuid);
+        $parcel = BusinessFacade::cancelParcel(Auth::id(), $uuid);
         return new  JsonResponse([
             'uuid' => $parcel->uuid,
             'status' => $parcel->status->value

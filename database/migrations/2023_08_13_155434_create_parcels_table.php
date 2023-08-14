@@ -9,7 +9,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('parcels', function (Blueprint $table) {
-            $table->integerIncrements('id');
+            $table->id();
             $table->uuid()->index();
 
             $table->foreignId('delivery_courier_id')->nullable()->constrained('delivery_couriers');

@@ -4,10 +4,13 @@ namespace App\Http\Controllers\API\V1\Delivery;
 
 use App\Enums\ParcelStatusEnum;
 use App\Exceptions\ParcelIsNotAcceptedException;
+use App\Facades\DeliveryFacade;
+use App\Facades\ParcelTrackLogFacade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginationRequest;
+use App\Http\Requests\ParcelLocationRequest;
 use App\Http\Resources\ParcelResource;
-use App\Services\DeliveryCourierService\DeliveryCourierService;
+use App\Notifications\BusinessParcelNotification;
 use Exception;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
@@ -15,21 +18,17 @@ use Throwable;
 
 class DeliveryCourierParcelController extends Controller
 {
-    public function __construct(private readonly DeliveryCourierService $deliveryCourierService)
-    {
-    }
 
     public function pendingParcels(PaginationRequest $request): AnonymousResourceCollection
     {
-        $parcels = $this->deliveryCourierService
-            ->getPendingParcels($request->validated('page'), $request->validated('per_page'));
+        $parcels = DeliveryFacade::getPendingParcels($request->validated('page'), $request->validated('per_page'));
 
         return ParcelResource::collection($parcels);
     }
 
     public function acceptedParcels(PaginationRequest $request): AnonymousResourceCollection
     {
-        $parcels = $this->deliveryCourierService->getDeliveryCourierParcels(
+        $parcels = DeliveryFacade::getDeliveryCourierParcels(
             Auth::id(),
             $request->validated('page'),
             $request->validated('per_page'),
@@ -43,9 +42,13 @@ class DeliveryCourierParcelController extends Controller
     /**
      * @throws Exception
      */
-    public function assignParcel(string $uuid): ParcelResource
+    public function assignParcel(ParcelLocationRequest $request, string $uuid): ParcelResource
     {
-        $parcel = $this->deliveryCourierService->assignParcel(Auth::id(), $uuid);
+        $parcel = DeliveryFacade::assignParcel(Auth::id(), $uuid);
+
+        ParcelTrackLogFacade::store($parcel->id, $request->validated('latitude'), $request->validated('longitude'));
+
+        $parcel->business->notify(new BusinessParcelNotification($parcel));
 
         return ParcelResource::make($parcel);
     }
@@ -55,27 +58,42 @@ class DeliveryCourierParcelController extends Controller
      * @throws ParcelIsNotAcceptedException
      * @throws Throwable
      */
-    public function goToParcelSource(string $uuid): ParcelResource
+    public function goToParcelSource(ParcelLocationRequest $request, string $uuid): ParcelResource
     {
-        $parcel = $this->deliveryCourierService->goToSource($uuid, Auth::id());
+        $parcel = DeliveryFacade::goToSource($uuid, Auth::id());
+
+        ParcelTrackLogFacade::store($parcel->id, $request->validated('latitude'), $request->validated('longitude'));
+
+        $parcel->business->notify(new BusinessParcelNotification($parcel));
+
         return ParcelResource::make($parcel);
     }
 
     /**
      * @throws Throwable
      */
-    public function goToParcelDestination(string $uuid): ParcelResource
+    public function goToParcelDestination(ParcelLocationRequest $request, string $uuid): ParcelResource
     {
-        $parcel = $this->deliveryCourierService->goToDestination($uuid, Auth::id());
+        $parcel = DeliveryFacade::goToDestination($uuid, Auth::id());
+
+        ParcelTrackLogFacade::store($parcel->id, $request->validated('latitude'), $request->validated('longitude'));
+
+        $parcel->business->notify(new BusinessParcelNotification($parcel));
+
         return ParcelResource::make($parcel);
     }
 
     /**
      * @throws Throwable
      */
-    public function deliverParcel(string $uuid): ParcelResource
+    public function deliverParcel(ParcelLocationRequest $request, string $uuid): ParcelResource
     {
-        $parcel = $this->deliveryCourierService->deliverParcel($uuid, Auth::id());
+        $parcel = DeliveryFacade::deliverParcel($uuid, Auth::id());
+
+        ParcelTrackLogFacade::store($parcel->id, $request->validated('latitude'), $request->validated('longitude'));
+
+        $parcel->business->notify(new BusinessParcelNotification($parcel));
+
         return ParcelResource::make($parcel);
     }
 }
