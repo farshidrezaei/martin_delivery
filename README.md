@@ -26,30 +26,30 @@ docker compose up -d
 after that all services pulled and started migrate database
 
 ```bash
-docker exec -it product_marketing-php composer install
+docker exec -it martin_delivery-php composer install
 ```
 
 then generate key
 
 ```bash
-docker exec -it product_marketing-php php /var/www/html/artisan key:generate
+docker exec -it martin_delivery-php php /var/www/html/artisan key:generate
 ```
 
 then migrate database
 
 ```bash
-docker exec -it product_marketing-php php /var/www/html/artisan migrate
+docker exec -it martin_delivery-php php /var/www/html/artisan migrate
 ```
 
 if you want to generate tokens for testing functionality by something like Postman, run bellow command:
 
 ```bash
-docker exec -it product_marketing-php php /var/www/html/artisan generate:test-tokens
+docker exec -it martin_delivery-php php /var/www/html/artisan generate:test-tokens
 ```
 
 ## Test
 ```bash
-docker exec -it product_marketing-php php /var/www/html/artisan test
+docker exec -it martin_delivery-php php /var/www/html/artisan test
 ```
 
 
